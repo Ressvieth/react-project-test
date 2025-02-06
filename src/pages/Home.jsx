@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Layout } from "../components/Layout/Layout";
 import { Postview } from "../components/Postview";
+import Loader from "../components/Loader";
 
 export const Home = () => {
   const [posts, setPosts] = useState();
@@ -10,8 +11,6 @@ export const Home = () => {
       .then((response) => response.json())
       .then((data) => setPosts(data));
   }, []);
-
-  console.log("posts from Home component:", posts);
 
   const updatedPosts = posts?.map((post) => {
     return {
@@ -27,11 +26,13 @@ export const Home = () => {
           <div className="middle-sidebar-left">
             <div className="row feed-body">
               <div className="col-xl-8 col-xxl-9 col-lg-8">
-                {updatedPosts &&
-                  updatedPosts.length > 0 &&
+                {!updatedPosts || updatedPosts.length < 1 ? (
+                  <Loader />
+                ) : (
                   updatedPosts.map((post) => (
                     <Postview key={post.id} {...post} />
-                  ))}
+                  ))
+                )}
               </div>
             </div>
           </div>
