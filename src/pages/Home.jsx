@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Layout } from "../components/Layout/Layout";
 import { Postview } from "../components/Postview";
 import Loader from "../components/Loader";
+import { Createpost } from "../components/Createpost";
 
 export const Home = () => {
   const [posts, setPosts] = useState();
@@ -26,6 +27,7 @@ export const Home = () => {
           <div className="middle-sidebar-left">
             <div className="row feed-body">
               <div className="col-xl-8 col-xxl-9 col-lg-8">
+                <Createpost />
                 {!updatedPosts || updatedPosts.length < 1 ? (
                   <Loader />
                 ) : (
